@@ -14,7 +14,7 @@
     form {
       max-width: 500px;
       margin: 0 auto;
-      background-color: #fff;
+      background-color: #f2f2f2;
       padding: 20px;
       border-radius: 5px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -28,7 +28,7 @@
     input[type="date"] {
       width: 100%;
       padding: 10px;
-      border: 1px solid #ccc;
+      border: 1px solid #d3d3d3;
       border-radius: 5px;
       margin-bottom: 20px;
       box-sizing: border-box;
@@ -36,68 +36,71 @@
     select {
       width: 100%;
       padding: 10px;
-      border: 1px solid #ccc;
+      border: 1px solid #d3d3d3;
       border-radius: 5px;
       margin-bottom: 20px;
       box-sizing: border-box;
     }
     input[type="submit"] {
-      background-color: #4CAF50;
-      color: #fff;
+      background-color: #cb0004;
+      color: #ffffff;
       padding: 10px 20px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
     input[type="submit"]:hover {
-      background-color: #3e8e41;
+      background-color: #cb0004;
     }
   </style>
 </head>
 <body>
-  <h1></h1>
-  <form action="/submit_create" method="post">
-    <label for="surname">Фамилия:</label>
-    <input type="text" id="surname" name="surname">
+<h1></h1>
+<form action="/submit_create" method="post">
+  <label for="surname">Фамилия:</label>
+  <input type="text" id="surname" name="surname">
 
-    <label for="name">Имя:</label>
-    <input type="text" id="name" name="name">
+  <label for="name">Имя:</label>
+  <input type="text" id="name" name="name">
 
-    <label for="team">Команда:</label>
-    <select id="team" name="team">
-      <option value="Поддержка">Поддержка</option>
-      <option value="Аналитика">Аналитика</option>
-      <option value="Разработка">Разработка</option>
-      <option value="Тестирование">Тестирование</option>
-    </select>
+  <label for="team">Команда:</label>
+  <select id="team" name="team">
+    <option value="Поддержка">Поддержка</option>
+    <option value="Аналитика">Аналитика</option>
+    <option value="Разработка">Разработка</option>
+    <option value="Тестирование">Тестирование</option>
+  </select>
 
-    <label for="date">Дата:</label>
-    <input type="date" id="date" name="date">
+  <label for="date">Дата выхода</label>
+  <input type="date" id="date" name="date">
 
-    <label for="hr">Ответственный:</label>
-    <select id="selectHR" onchange="selectHR()">
-      <option value="option1">Даша Маркова</option>
-      <option value="option2">Настя Дудник</option>
-      <option value="option3">Даша Виноградова</option>
-      <option value="option4">Костя Степано</option>
-      <option value="other">Другое</option>
-    </select>
-    <input type="text" id="hr" style="display:none">
-    <br>
+  <label for="hr">Ответственный</label>
+  <select id="myHrSelect" onchange="myFunction()">
+    <option value="option1">Даша Маркова</option>
+    <option value="option2">Настя Дудник</option>
+    <option value="option3">Даша Виноградова</option>
+    <option value="option4">Костя Степанов</option>
+    <option value="other">Другое</option>
+  </select>
+  <input type="text" id="hr" style="display:none">
 
-    <input type="submit" value="Отправить">
-  </form>
+
+
+  <br>
+
+  <input type="submit" value="Отправить">
+</form>
 </body>
 </html>
 
 <script>
-function selectHR() {
-  var select = document.getElementById("selectHR");
-  var input = document.getElementById("hr");
-  if (select.value == "other") {
-    input.style.display = "inline";
-  } else {
-    input.style.display = "none";
+  function myFunction() {
+    var select = document.getElementById("myHrSelect");
+    var input = document.getElementById("hr");
+    if (select.value == "other") {
+      input.style.display = "inline";
+    } else {
+      input.style.display = "none";
+    }
   }
-}
 </script>
