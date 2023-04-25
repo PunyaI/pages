@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script> <!--Подключаем скрипт от телеграм-->
+  <link rel="stylesheet" href="/assets/style.css" />
   <title></title>
   <style>
     body {
@@ -56,7 +61,7 @@
 </head>
 <body>
 <h1></h1>
-<form action="/submit_create" method="post">
+<form id="create_form" action="/submit_create" method="post">
   <label for="surname">Фамилия:</label>
   <input type="text" id="surname" name="surname">
 
@@ -71,21 +76,18 @@
     <option value="Тестирование">Тестирование</option>
   </select>
 
-  <label for="date">Дата выхода</label>
+  <label for="date">Дата:</label>
   <input type="date" id="date" name="date">
 
-  <label for="hr">Ответственный</label>
-  <select id="myHrSelect" onchange="myFunction()">
+  <label for="hr">Ответственный:</label>
+  <select id="selectHR" onchange="selectHR()">
     <option value="option1">Даша Маркова</option>
     <option value="option2">Настя Дудник</option>
     <option value="option3">Даша Виноградова</option>
-    <option value="option4">Костя Степанов</option>
+    <option value="option4">Костя Степано</option>
     <option value="other">Другое</option>
   </select>
   <input type="text" id="hr" style="display:none">
-
-
-
   <br>
 
   <input type="submit" value="Отправить">
@@ -94,8 +96,8 @@
 </html>
 
 <script>
-  function myFunction() {
-    var select = document.getElementById("myHrSelect");
+  function selectHR() {
+    var select = document.getElementById("selectHR");
     var input = document.getElementById("hr");
     if (select.value == "other") {
       input.style.display = "inline";
@@ -103,4 +105,45 @@
       input.style.display = "none";
     }
   }
+</script>
+
+<script>
+  let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
+
+  tg.expand(); //расширяем на все окно
+
+  tg.MainButton.text = "Submmit"; //изменяем текст кнопки
+  tg.MainButton.show()
+  tg.MainButton.enable()
+  //tg.MainButton.textColor = "#F55353"; //изменяем цвет текста кнопки
+  tg.MainButton.color = "#267136"; //изменяем цвет бэкграунда кнопки
+
+      // convert to html
+
+  //sendRequest("https://punyai.github.io/pages/");
+
+  /*function form_close() {
+    tg.close();
+    return false;
+  }*/
+
+  var form = document.getElementById("create_form");
+  //form.addEventListener('submit',form_close, false);
+  /*let btnED = document.getElementById("btnED");
+  btnED.addEventListener('click', function(){ //вешаем событие на нажатие html-кнопки
+    form.requestSubmit();
+  });*/
+  Telegram.WebApp.onEvent('mainButtonClicked', function(){
+    form.submit();
+    //tg.close();
+    //tg.sendData("response");
+    //при клике на основную кнопку отправляем данные в строковом виде
+  });
+
+
+  //let usercard = document.getElementById("usercard"); //получаем блок usercard
+  //let userid = document.createElement('p'); //создаем еще параграф
+  //userid.innerText = `${tg.initDataUnsafe.user.id}`; //показываем user_id
+  //usercard.appendChild(userid); //добавляем
+
 </script>
