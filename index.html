@@ -54,9 +54,6 @@
       border-radius: 5px;
       cursor: pointer;
     }
-    input[type="submit"]:hover {
-      background-color: #cb0004;
-    }
   </style>
 </head>
 <body>
@@ -89,8 +86,6 @@
   </select>
   <input type="text" id="hr" style="display:none">
   <br>
-
-  <input type="submit" value="Отправить">
 </form>
 </body>
 </html>
@@ -111,14 +106,13 @@
   let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
 
   tg.expand(); //расширяем на все окно
-
   tg.MainButton.text = "Submmit"; //изменяем текст кнопки
   tg.MainButton.show()
   tg.MainButton.enable()
   //tg.MainButton.textColor = "#F55353"; //изменяем цвет текста кнопки
-  tg.MainButton.color = "#267136"; //изменяем цвет бэкграунда кнопки
-
-      // convert to html
+  tg.MainButton.color = "#cb0004"; //изменяем цвет бэкграунда кнопки
+  tg.MainButton.borderRadius = "5px"
+  // convert to html
 
   //sendRequest("https://punyai.github.io/pages/");
 
@@ -133,7 +127,8 @@
   btnED.addEventListener('click', function(){ //вешаем событие на нажатие html-кнопки
     form.requestSubmit();
   });*/
-  Telegram.WebApp.onEvent('mainButtonClicked', function(){
+  Telegram.WebApp.onEvent('submit', function(){
+    print("hello")
     form.submit();
     //tg.close();
     //tg.sendData("response");
