@@ -75,14 +75,14 @@
     <input type="date" id="date" name="date">
 
     <label for="hr">Ответственный:</label>
-    <select id="hr" onchange="selectHR()">
+    <select id="selectHR" onchange="selectHR()">
       <option value="option1">Даша Маркова</option>
       <option value="option2">Настя Дудник</option>
       <option value="option3">Даша Виноградова</option>
       <option value="option4">Костя Степано</option>
       <option value="other">Другое</option>
     </select>
-    <input type="text" id="myInput" style="display:none">
+    <input type="text" id="hr" style="display:none">
     <br>
 
     <input type="submit" value="Отправить">
@@ -92,8 +92,8 @@
 
 <script>
 function selectHR() {
-  var select = document.getElementById("mySelect");
-  var input = document.getElementById("myInput");
+  var select = document.getElementById("selectHR");
+  var input = document.getElementById("hr");
   if (select.value == "other") {
     input.style.display = "inline";
   } else {
