@@ -74,18 +74,30 @@
     <label for="date">Дата:</label>
     <input type="date" id="date" name="date">
 
-    <label for="responsible">Ответственный:</label>
-    <select id="responsible" name="responsible">
-      <option value="">Выберите ответственного</option>
-      <option value="Даша">Даша</option>
-      <option value="Настя">Настя</option>
-      <option value="Катя">Катя</option>
+    <label for="hr">Ответственный:</label>
+    <select id="hr" onchange="selectHR()">
+      <option value="option1">Даша Маркова</option>
+      <option value="option2">Настя Дудник</option>
+      <option value="option3">Даша Виноградова</option>
+      <option value="option4">Костя Степано</option>
+      <option value="other">Другое</option>
     </select>
+    <input type="text" id="myInput" style="display:none">
     <br>
-    <label for="responsible_other">Или введите вручную:</label>
-    <input type="text" id="responsible_other" name="responsible_other">
 
     <input type="submit" value="Отправить">
   </form>
 </body>
 </html>
+
+<script>
+function selectHR() {
+  var select = document.getElementById("mySelect");
+  var input = document.getElementById("myInput");
+  if (select.value == "other") {
+    input.style.display = "inline";
+  } else {
+    input.style.display = "none";
+  }
+}
+</script>
