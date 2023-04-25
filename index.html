@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Telegram WebApps API</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script> <!--Подключаем скрипт от телеграм-->
+    <link rel="stylesheet" href="/assets/style.css" />
+</head>
+
+<body>
+<!--<div id="usercard"> Карта профиля, человека, который к нам обратился
+</div>-->
+<p class="text">Добавляем нового сотрудника</p> <!--Просто текст для проверки-->
+<form id="form-id" action="/webapp_data_create" method="GET"> <!-- -->
+    <label class="hint" for="team">Команда</label><br>
+    <select id="team" name="team">
+    </select><br>
+    <label class="hint" for="event">Событие</label><br>
+    <select id="event" name="event">
+    </select><br>
+    <label class="hint" for="surname">Фамилия</label><br>
+    <textarea placeholder="Обязательное поле" id="surname" name="surname"></textarea><br>
+    <label class="hint" for="name">Имя</label><br>
+    <textarea id="name" name="name"></textarea><br>
+    <label class="hint" for="hr">HR</label><br>
+    <select id="hr" name="hr">
+        <option value="none" selected hidden>Выбрать</option>
+    </select><br>
+</form>
+<!--<button id="btnED" class="button">Submit</button>-->
+</body>
+
+<script>
+    let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
+
+    tg.expand(); //расширяем на все окно
+
+    tg.MainButton.text = "Submmit"; //изменяем текст кнопки
+    tg.MainButton.show()
+    tg.MainButton.enable()
+    //tg.MainButton.textColor = "#F55353"; //изменяем цвет текста кнопки
+    tg.MainButton.color = "#267136"; //изменяем цвет бэкграунда кнопки
+
+    function sendRequest(url){
+        fetch(url,{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "access-control-allow-origin, access-control-allow-headers"
+            }
+        }).then(response=>{
+                if(response.status !==200) {
+                    throw new Error(`HTTP ERROR:${response.status}`);
+                }
+                return response.text()
+            }
+
+        ).then(data => {
+            console.log(data);
+            const employees = JSON.parse(data);
+            var customer = document.getElementById('team');
+            var opt = document.createElement('option');
+            for (var i = 0; i < employees.teamType.length; i++) {
+                opt = document.createElement('option');
+                opt.value = employees.teamType[i];
+                opt.innerHTML = employees.teamType[i];
+                customer.appendChild(opt);
+            }
+            var channel = document.getElementById('event');
+            for (i = 0; i < employees.eventType.length; i++) {
+                opt = document.createElement('option');
+                opt.value = employees.eventType[i];
+                opt.innerHTML = employees.eventType[i];
+                channel.appendChild(opt);
+            }
+            var person = document.getElementById('hr');
+            for (i = 0; i < employees.HRs.length; i++) {
+                opt = document.createElement('option');
+                opt.value = employees.HRs[i].userName;
+                opt.innerHTML = employees.HRs[i].surName;
+                person.appendChild(opt);
+            }
+            // convert to html
+
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    sendRequest("https://bot.humanfactorlabs.ru/setup_employee");
+
+    /*function form_close() {
+      tg.close();
+      return false;
+    }*/
+
+    var form = document.getElementById("form-id");
+    //form.addEventListener('submit',form_close, false);
+    /*let btnED = document.getElementById("btnED");
+    btnED.addEventListener('click', function(){ //вешаем событие на нажатие html-кнопки
+      form.requestSubmit();
+    });*/
+    Telegram.WebApp.onEvent('mainButtonClicked', function(){
+        form.submit();
+        //tg.close();
+        //tg.sendData("response");
+        //при клике на основную кнопку отправляем данные в строковом виде
+    });
+
+
+    //let usercard = document.getElementById("usercard"); //получаем блок usercard
+    //let userid = document.createElement('p'); //создаем еще параграф
+    //userid.innerText = `${tg.initDataUnsafe.user.id}`; //показываем user_id
+    //usercard.appendChild(userid); //добавляем
+
+</script>
+</html>
