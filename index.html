@@ -65,6 +65,20 @@
   <label for="name">Имя:</label>
   <input type="text" id="name" name="name">
 
+  <label for="dateEmployment">Дата выхода на работу</label>
+  <input type="date" id="dateEmployment" name="dateEmployment">
+
+  <label for="event">Событие</label>
+  <select id="event" name="event">
+    <option value="Окончание испытательного">Окончание испытательного</option>
+    <option value="Плановое ревью">Плановое ревью</option>
+    <option value="Выход на работу">Выход на работу</option>
+    <option value="Увольнение">Увольнение</option>
+  </select>
+
+  <label for="dateEvent">Дата события</label>
+  <input type="date" id="dateEvent" name="dateEvent">
+
   <label for="team">Команда:</label>
   <select id="team" name="team">
     <option value="Поддержка">Поддержка</option>
@@ -73,16 +87,14 @@
     <option value="Тестирование">Тестирование</option>
   </select>
 
-  <label for="date">Дата:</label>
-  <input type="date" id="date" name="date">
+  <label for="sensey">Наставник</label>
+  <input type="text" id="sensey" name="sensey">
 
-  <label for="hr">Ответственный</label>
+  <label for="hr">HR</label>
   <select id="myHrSelect" onchange="selectHr()">
     <option value="option1">Даша Маркова</option>
-    <option value="option2">Настя Дудник</option>
-    <option value="option3">Даша Виноградова</option>
-    <option value="option4">Костя Степанов</option>
-    <option value="other">Другое</option>
+    <option value="option2">Даша Виноградова</option>
+    <option value="other">Ввод</option>
   </select>
   <input type="text" id="hr" style="display:none">
 
