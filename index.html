@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Добавление сотрудника</title>
+  <title></title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -55,7 +55,7 @@
   </style>
 </head>
 <body>
-  <h1>Добавление сотрудника</h1>
+  <h1></h1>
   <form action="/submit_create" method="post">
     <label for="surname">Фамилия:</label>
     <input type="text" id="surname" name="surname">
@@ -75,7 +75,15 @@
     <input type="date" id="date" name="date">
 
     <label for="responsible">Ответственный:</label>
-    <input type="text" id="responsible" name="responsible">
+    <select id="responsible" name="responsible">
+      <option value="">Выберите ответственного</option>
+      <option value="Даша">Даша</option>
+      <option value="Настя">Настя</option>
+      <option value="Катя">Катя</option>
+    </select>
+    <br>
+    <label for="responsible_other">Или введите вручную:</label>
+    <input type="text" id="responsible_other" name="responsible_other">
 
     <input type="submit" value="Отправить">
   </form>
